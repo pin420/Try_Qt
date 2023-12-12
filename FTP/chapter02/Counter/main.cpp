@@ -12,28 +12,29 @@
 #include "Counter.h"
 
 // ----------------------------------------------------------------------
-int main (int argc, char** argv)
-{
+int main (int argc, char** argv) {
     QApplication app(argc, argv);
 
     QLabel      lbl("0");
+    lbl.setAlignment(Qt::AlignCenter);
+    lbl.resize(200, 200);
+
     QPushButton cmd("ADD");
+    cmd.resize(200, 200);
+    
     Counter     counter;
 
     lbl.show();
     cmd.show();
 
     QObject::connect(&cmd, SIGNAL(clicked()), 
-                     &counter, SLOT(slotInc())
-                    );
+                     &counter, SLOT(slotInc()));
 
     QObject::connect(&counter, SIGNAL(counterChanged(int)),
-                     &lbl, SLOT(setNum(int))
-                    );
+                     &lbl, SLOT(setNum(int)));
 
     QObject::connect(&counter, SIGNAL(goodbye()), 
-                     &app, SLOT(quit())
-                    );
+                     &app, SLOT(quit()));
 
     return app.exec();
 }
