@@ -1,0 +1,47 @@
+// ======================================================================
+//  main.cpp
+// ======================================================================
+//                   This file is a part of the book 
+//             "Qt 5.10 Professional programming with C++"
+//                       http://qt-book.com
+// ======================================================================
+//  Copyright (c) 2017 by Max Schlee
+// ======================================================================
+
+#include <QtWidgets>
+#include "CounterMap.h"
+
+// ----------------------------------------------------------------------
+int main (int argc, char** argv) {
+    QApplication app(argc, argv);
+
+    QLabel      lbl("0");
+    lbl.setAlignment(Qt::AlignCenter);
+    lbl.resize(200, 200);
+
+    QPushButton cmd_plus("PLUS");
+    cmd_plus.resize(200, 200);
+
+    QPushButton cmd_min("MINUS");
+    cmd_min.resize(200, 200);
+    
+    Counter     counter;
+
+    lbl.show();
+    cmd_plus.show();
+    cmd_min.show();
+
+    QObject::connect(&cmd_plus, SIGNAL(clicked()), 
+                     &counter, SLOT(slotInc()));
+
+    QObject::connect(&cmd_min, SIGNAL(clicked()), 
+                     &counter, SLOT(slotInc_min()));
+
+    QObject::connect(&counter, SIGNAL(counterChanged(int)),
+                     &lbl, SLOT(setNum(int)));
+
+    QObject::connect(&counter, SIGNAL(goodbye()), 
+                     &app, SLOT(quit()));
+
+    return app.exec();
+}
