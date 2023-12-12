@@ -1,1 +1,3 @@
 *.stash
+build/
+*.sh
