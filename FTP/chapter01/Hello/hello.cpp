@@ -9,10 +9,13 @@
 // ======================================================================
 
 #include <QtWidgets>
-int main(int argc, char** argv)
-{
+
+int main(int argc, char** argv) {
     QApplication app(argc, argv);
     QLabel lbl("Hello, World !");
+    lbl.setWindowTitle("My First Qt Program");
+    lbl.setAlignment(Qt::AlignCenter);
+    lbl.resize(200, 200);
     lbl.show();
     return app.exec();
 }
